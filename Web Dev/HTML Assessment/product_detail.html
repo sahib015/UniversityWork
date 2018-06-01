@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<title>Tesco</title>
+
+<!--start of style for index.html-->
+<style type='text/css'>
+body{
+	overflow-y:scroll;
+	
+	
+}
+header{
+width:100%;
+
+background-color:#d2d7e9;
+}
+
+nav.side{
+width:10%;
+}
+nav ul {
+  list-style: none;
+  background-color:#d2d7e9;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2em;
+  line-height: 40px;
+  text-align: left;
+}
+
+nav a {
+  text-decoration: none;
+  color: #FFF;
+  display: block;
+  padding-left: 15px;
+  border-bottom: 1px solid #888;
+  transition: .3s background-color;
+}
+
+nav a:hover {
+  background-color:#5A6F8E;
+}
+
+nav a.active {
+  background-color: #aaa;
+  color: #000;
+  cursor: default;
+}
+
+/* Sub Menus */
+nav li li {
+  font-size: .8em;
+}
+nav li {
+    width: 130px;
+    border-bottom: none;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.4em;
+    display: inline-block;
+    margin-right: -4px;
+  }
+
+  nav a {
+    border-bottom: none;
+  }
+
+  nav > ul > li {
+    text-align: center;
+  }
+
+  nav > ul > li > a {
+    padding-left: 0;
+  }
+
+  /* Sub Menus */
+  nav li ul {
+    position: absolute;
+    display: none;
+    width: inherit;
+  }
+
+  nav li:hover ul {
+    display: block;
+  }
+
+  nav li ul li {
+    display: block;
+  }
+nav ul {
+  list-style: none;
+  background-color:#d2d7e9;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2em;
+  line-height: 40px;
+  text-align: left;
+}
+
+nav a {
+  text-decoration: none;
+  color: #000;
+  display: block;
+  padding-left: 15px;
+  border-bottom: 1px solid #888;
+  transition: .3s background-color;
+}
+
+nav a:hover {
+  background-color:#0037ef;
+  color:#FFF;
+}
+
+nav a.active {
+  background-color: #aaa;
+  color: #000;
+  cursor: default;
+}
+
+/* Sub Menus */
+nav li li {
+  font-size: .8em;
+}
+
+/*******************************************
+   Style menu for larger screens
+
+   Using 650px (130px each * 5 items), but ems
+   or other values could be used depending on other factors
+********************************************/
+
+@media screen and (min-width: 650px) {
+  .login li {
+    width: 130px;
+    border-bottom: none;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.4em;
+    display: inline-block;
+    margin-right: -4px;
+  }
+
+  nav a {
+    border-bottom: none;
+  }
+
+  .login > ul > li {
+    text-align: center;
+  }
+
+  .login > ul > li > a {
+    padding-left: 0;
+  }
+
+  /* Sub Menus */
+  .login li ul {
+    position: absolute;
+    display: none;
+    width: inherit;
+  }
+
+  .login li:hover ul {
+    display: block;
+  }
+
+  .login li ul li {
+    display: block;
+  }
+#shoppingcart{
+margin-left:400px;
+}
+.txt{
+	color:#000;
+	text-align:center;
+}
+
+
+footer{
+
+width:100%;
+
+background-color:#d2d7e9;
+
+}
+#copy{
+text-align:center;
+}
+#sidebar-nav{
+	float:left;
+	width: 15%;
+	height:100%;
+	background-color:#d2d7e9;;
+}
+
+#main_logo{
+width:188px;
+height:88px;
+
+}
+.sidebar-nav-links{
+color:#000;
+}
+#tin_products{
+float: left;
+}
+.product_details{
+margin-left:auto;
+margin-top:auto;
+
+float:left;
+
+}
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
+	
+#tinnedProducts{
+border:0px;
+cellpadding:2px;
+cellspacing:2px
+width:100%;
+
+}
+#wrapper{
+width:100%;
+height:100%;
+
+}
+#baked_bins{
+width: 30%;
+height:30%;
+
+}
+#image{
+float:right;
+width:75%;
+height:75%;
+}
+</style>
+<!--end of style for index.html-->
+</head>
+
+<body>
+<!-- start of wrapper -->
+<div id='wrapper'>
+<!-- start of header  -->
+<header>
+<!-- start of header content -->
+<div id='logo'>
+<img  id='main_logo' src='https://www.tesco.sk/uploads/shop_format/logo-tesco-supermarket.png' alt='logo here'/>
+</div>
+<!-- end of header content -->
+</header>
+<!-- end of header -->
+<!-- start of navigation bar -->
+<nav>
+<ul>
+<li> <a href="index.html" >Food Cupboard</a></li>
+<li> <a href="#">Bakery</a></li>
+<li> <a href="#">Frozen Food</a></li>
+<li> <a href="#">Drinks</a></li>
+<li> <a href="#">Household</a></li>
+<li> <a href="#">Pets</a></li>
+
+</ul>
+</nav>
+<!-- end of navigation bar -->
+
+<!-- start of sidebar-nav -->
+
+<div  id="sidebar-nav">
+<nav class="side">
+<ul>
+<li> <a class='sidebar-nav-links' href="index.html">Tins, Cans & Packets</a></li>
+<li> <a class='sidebar-nav-links' href="#">Crackers & Crispbreads</a></li>
+<li> <a class='sidebar-nav-links' href="#">Chocolate</a></li>
+<li> <a class='sidebar-nav-links' href="#">Cereals</a></li>
+</ul>
+</nav>
+</div>
+
+<!-- end of sidebar-nav-->
+<div id='content' >
+<div class="product_details">
+<h1>Heinz Baked Beans In Tomato Sauce 415G X 4 Pack</h1>
+
+<div id="image">
+<img class='displayed' id= 'baked_bins' src='products/baked_bins.jpg' alt='Baked Beans 415G X 4 Pack'/>
+</div>
+
+
+
+<p><strong>Description:</strong></p>
+
+<p>Baked beans in a deliciously rich tomato sauce</p>
+
+<p>Pack Size: 415g</p>
+
+
+<ul>
+<li>Naturally high in protein.</li>
+<li>Naturally high in fibre.</li>
+<li>Naturally low in fat.</li>
+</ul>
+<p><strong>Price: </strong>&pound; 2.00</p>
+<p><strong>Ingredients:</strong></p>
+<p>
+Beans (51%), Tomatoes (34%), Water, Sugar, Spirit Vinegar, Modified Cornflour, Salt, Spice Extracts, Herb Extract
+</p>
+<hr>
+<!-- start of add to cart -->
+<div id='addCart'>
+<input type='submit' value='Add to Cart'/>
+</div>
+<!-- end of add to cart -->
+<!-- end of product_details -->
+</div>
+<!-- end of content -->
+
+</div>
+
+
+
+<!-- end of wrapper -->
+</div>
+
+</body>
+</html>
