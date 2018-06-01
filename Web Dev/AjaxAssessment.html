@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJAX Assessment</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+var url="https://www.cs.kent.ac.uk/people/staff/lb514/hygiene/hygiene.php";
+var ratingURL="https://www.cs.kent.ac.uk/people/staff/lb514/hygiene/rating.php";
+
+$(document).ready(function(){
+loadData();// calls the loadData method  to get the records from the server
+createPaginators();// creates the paginators by calling the createPaginators method
+$("#noOfPages").on('click','.pgNo',function(){
+  goToPage($(this).val());// navigating to the page
+
+});
+
+$("#form_search").submit(function(){
+
+  var name=($('#txt_search').val());// setting var name the value of the text box in the form
+
+    search(name);// call search method to search for the name given in the text field
+return false;
+});
+
+  $("#records_table").on('click','.customerRating',function(){
+  //open customerRating popup dialog
+
+  $( "#customerRatingDialog" ).dialog({
+     autoOpen: false,
+    modal: true,
+     width:250,
+     height:150
+
+   }
+ );
+getRating($(this).val());
+  $( "#customerRatingDialog" ).dialog( "open" );
+
+});
+});
+
+function loadData(){
+  var r="";// var name for the rows of the table
+  // getting the data from the URL
+   $.get(url,function(data){
+
+     for (var i in data){
+       // adding the data retrieved in a table
+       r+="<tr><td>"+data[i].business+"</td><td>"+data[i].address+"</td><td>"+data[i].rating+"</td><td>"+data[i].date+" </td><td><button class='customerRating' value='"+data[i].business+"'>Get Rating</button></td></tr>"
+     }
+     //appending the rows of the table into the records_table
+     $("#records_table").append(r);
+   },"JSON");
+}
+function createPaginators(){
+  var pages="";// var name for the pagination
+  // getting the data from the URL
+   $.get(url,{op:"pages"},function(data){
+
+     for (var i=1; i<=data.pages;i++){
+       // adding the number of pages in buttons
+
+     pages += "<li><button class='pgNo' value="+i+">"+i+"</button></li>";
+
+
+     }
+     //appending the number of pages to the unorderd list
+     $("#noOfPages").append(pages);
+   },"JSON");
+
+}
+
+function goToPage(pageNo){
+   $('#records_table').empty();// empty results in table
+
+  var r="";// var name for the rows of the table
+  // getting the data from the URL and retrieving the page number
+   $.get(url,{op : "retrieve", page : ""+pageNo},function(data){
+var thead="<thead><th>Business</th><th>Address</th><th>Hygene</th><th>Date</th><th>Customer Rating</th></thead>";// setting the table header of the table
+$("#records_table").append(thead);// appending the table head of the table into the records_table
+     for (var i in data){
+       // adding the data retrieved in a table
+       r+="<tr><td>"+data[i].business+"</td><td>"+data[i].address+"</td><td>"+data[i].rating+"</td><td>"+data[i].date+" </td><td><button class='customerRating' value='"+data[i].business+"'>Get Rating</button></td</tr>"
+     }
+     //appending the rows of the table into the records_table to display the records of the page
+     $("#records_table").append(r);
+   },"JSON");
+}
+
+function search(name){
+  $('#records_table').empty();// empty results in table
+
+ var r="";// var name for the rows of the table
+ // getting the data from the URL and getting the search parameter
+  $.get(url,{op:"searchname",name :$("#txt_search").val()},function(data){
+var thead="<thead><th>Business</th><th>Address</th><th> Hygene</th><th>Date</th><th>Customer Rating</th></thead>";// setting the table header of the table
+$("#records_table").append(thead);// appending the table head of the table into the records_table
+    for (var i in data){
+      // adding the data retrieved in a table
+      r+="<tr><td>"+data[i].business+"</td><td>"+data[i].address+"</td><td>"+data[i].rating+"</td><td>"+data[i].date+" </td><td><button class='customerRating' value='"+data[i].business+"'>Get Rating</button></td</tr>"
+    }
+    //appending the rows of the table into the records_table to display the searched business name
+    $("#records_table").append(r);
+  },"JSON");
+}
+
+function getRating(businessName){
+  $("#customerRatingDialog").empty();// empty results of ratings
+  $.get(ratingURL,{name:businessName},function(data){
+    var holder=data;
+    if(holder.length==1 && holder[0].rating!==""){
+      // if the holder length is 1 and the rating is not 0 then returns the name of the business with its rating
+      ratings="<p> The customer rating of "+holder[0].business+" is "+holder[0].rating+"</p>";
+    }
+
+    else if(holder.length > 1){
+      // when the length is more than 1
+var rating="";
+      $.get(url,{op:"searchname", name:businessName},function(hygeneData){// gets results from the hygene url
+        for(var x=0; x<holder.length;x++){
+          if(holder.length==1){
+          //if the holder length is 1 it checks for address in the rating url which matches the postcode in the hygene url
+            if(holder[x].address.indexOf(hygeneData[0].postcode)!== -1){
+              //returns the rating of the resturant
+                  rating="<p> The customer rating of "+holder[0].business+" is "+holder[0].rating+"</p>";
+    $("#customerRatingDialog").empty().append(rating);// appending the rating
+            }
+
+          }
+          else if (holder.length >1) {
+// if the length is more than 1
+            for(var n in hygeneData){
+              //looks for the postcode of holder[x] in hygene url
+              if(holder[x].address.indexOf(hygeneData[n].postcode)!== -1){
+      //returns the rating of the resturant
+              rating="<p> The customer rating of "+holder[x].business+" is "+holder[x].rating+"</p>";;
+
+                $("#customerRatingDialog").empty().append(rating);// appending the rating
+           }
+           }
+
+          }
+
+        }
+
+
+      },"JSON");
+    }
+    else {
+      // when no ratings found
+      ratings="<p> No customer ratings record for "+businessName+"</p>";
+    }
+    $("#customerRatingDialog").empty().append(ratings);// appending the  ratings
+  },"JSON");
+}
+
+</script>
+<style>
+body{
+  background-color:#CCCCCC;
+}
+#wrapper{
+  width:700px;
+  height:auto;
+  margin-top: 5%;
+  margin-left:300px;
+}
+header{
+  width:100%;
+	height:auto;
+  background-color:#000;
+  color: #fff;
+border-style: solid;
+border-color: #000;
+
+}
+footer{
+  width: 100%;
+  height: auto;
+  background-color: #000;
+  color: #fff;
+  border-style: solid;
+  border-color: #000;
+}
+h1{
+  text-align: center;
+}
+.footer_text{
+  text-align: center;
+}
+#content{
+	width:100%;
+	height:100%;
+
+}
+ul.pagination {
+    display: inline-block;
+    padding:0;
+    margin: 0;
+    text-align: center;
+
+}
+
+ul.pagination li {
+  display: inline;
+padding: 5px;
+}
+
+#numberPages{
+text-align: center;
+  background-color: #3D72A4;
+  padding: 5px;
+  width: 100%;
+  height: auto;
+
+}
+#search{
+text-align: center;
+}
+#customerRatingDialog{
+  display: none;
+  background-color: #CCCC99;
+  border-style: solid;
+  border-radius: 4.5px;
+}
+.text{
+  color: #fff;
+}
+button{
+  border-radius: 3px;
+}
+</style>
+</head>
+<body>
+  <div id="wrapper">
+    <header>
+      <h1> AJAX Assessment </h1>
+    </header>
+    <div id="numberPages">
+      <ul class="pagination" id="noOfPages">
+        <li class="text">Pages:</li>
+      </ul>
+
+    </div>
+        <div id="content">
+
+        <p>This table below shows a list of resturants around Canterbury that a user can view the hygene and  customer ratiings of a specific resturant.</p>
+        <table id="records_table" border="1px">
+            <thead>
+              <th> Business</th>
+                <th> Address</th>
+                  <th>Hygene</th>
+                    <th> Date </th>
+                    <th>Customer Rating</th>
+                  </tr>
+            </thead>
+        </table>
+<div id="customerRatingDialog">
+</div>
+<div id="search">
+  <form id="form_search">
+    <label id="name">Business Name:</label>
+    <input id="txt_search" type="text" name="txt_search" />
+    <input id="btn_search" type="submit" value="Search"/>
+  </form>
+</div>
+      </div>
+      <footer>
+        <p class="footer_text">Copyright @2016 Sahib Jabbal (ssj9)</p>
+      </footer>
+  </div>
+</body>
+</html>
