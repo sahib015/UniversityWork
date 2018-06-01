@@ -1,0 +1,2 @@
+This is an iOS application for University of Kent community that is able to find a bus. This project was to personalise the application
+and build on the application from previous year students who had started the application.
