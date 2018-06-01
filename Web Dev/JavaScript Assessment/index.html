@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Simple Word Proceessor </title>
+<script type="text/javascript" src="JavaScript/formatingText.js"> </script>
+<link rel="stylesheet" type="text/css" href="CSS/style.css" />
+</head>
+
+<body>
+<!-- start of wrapper -->
+<div id="wrapper">
+<!-- start of header -->
+<header>
+<h1>Java Script Text Editor</h1>
+</header>
+
+<!-- end of header -->
+
+<!-- start of side bar -->
+<div id="sidebar">
+
+</div>
+<!-- end of side bar -->
+<!-- start of container -->
+<div id="container">
+
+
+<!-- start of style buttons -->
+<div id="formatting_style">
+<button id='boldBtn' class="format_buttons" onclick="bold('text');"><strong> B</strong></button>
+<button id='italicBtn' class="format_buttons" onclick="italics('text');"><i>I</i></button>
+<button id='underline' class="format_buttons"  onclick="underline('text');"><u>U</u></button>
+<label id='lbl_colour'> Font Colour: </label>
+<select name='colour' id='cmb_colour' onchange="changeColor();">
+	<option value='black' selected="selected">Black</option>
+	<option value='blue'>Blue</option>
+	<option value='green'>Green</option>
+	<option value='red'>Red</option>
+</select>
+
+<label id="lbl_font">Font: </label>
+<select name='font' id='cmb_font' onchange="changeFont();">
+	<option value='Times New Roman' selected="selected">Times New Roman</option>
+	<option value='Arial'>Arial</option>
+	<option value='Arial Narrow'>Arial Narrow</option>
+	<option value='Arial Black'>Arial Black</option>
+	<option value='Calibri'>Calibri</option>
+</select>
+	
+</div>
+
+<!-- end of style buttons -->
+<!-- start of text area -->
+<div id='text' contenteditable="true" class= "text_editor">
+
+</div>
+<!-- end of text area -->
+<!-- start of rgb -->
+<div id="rgb_values">
+<label id="lbl_background">Enter RGB values for text background: </label>
+<form name="rgb_form" id="rgb_form">
+<label id="lbl_red">Red:</label>
+<input type="text" name="txt_red" id="txt_red" size="3" />
+<label id="lbl_green">Green:</label>
+<input type="text" name="txt_green" id="txt_green" size="3" />
+<label id="lbl_blue">Blue:</label>
+<input type="text" name="txt_blue" id="txt_blue" size="3" />
+<label id="lbl_validator"></label>
+<input type="button" id="rgbBtn" class="format_buttons" name="rgbBtn" value="RGB" onclick="changeTextBackground();" />
+</form> 
+</div>
+<!-- end of rgb -->
+
+</div>
+<!-- end of container -->
+
+</div>
+
+<!-- end of wrapper -->
+</body>
+</html>
