@@ -1,0 +1,140 @@
+html{
+    font-family: sans-serif;
+}
+header{
+  width: 100%;
+  height: auto;
+  background-color: #09355A;
+}
+
+footer{
+  width: 100%;
+  height: auto;
+  background-color: #09355A;
+}
+
+h1{
+  text-align: center;
+  color: #FFF;
+}
+li{
+  list-style-type: none;
+}
+#information{
+  float:right;
+}
+#viewOutsideLight{
+float: left;
+text-align: center;
+    padding-left: 260px;
+    padding-top:0px;
+}
+.inner-div
+{
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+
+}
+
+#textFooter{
+  text-align: center;
+  color: #FFF;
+}
+
+#map{
+  width: 45%;
+  height: 600px;
+    border: 5px solid #09355A;
+}
+#markersKey{
+  float:right;
+}
+
+
+.popup-position{
+	display:none;
+	position:fixed;
+	top:0;
+	left:0;
+	background-color:rgba(0,0,0,0.7);
+	width:100%;
+	height:100%;
+
+}
+
+#popup-wrapper{
+	width:60% ;
+	margin:70px auto;
+	text-align:justify;
+  height: auto;
+
+}
+
+#popup-container{
+	background-color:#CCC;
+	padding:20px ;
+	border-radius:4px;
+
+}
+
+#markersKey{
+  position:absolute;
+    float:right;
+    padding-top: 170px;
+    font-size: 12px;
+
+}
+
+#markersKey img{
+    height: 15px;
+}
+
+#weatherDiv{
+float:right;
+
+}
+
+#weatherDiv p{
+    font-size: 12px;
+    padding-left: 5px;
+    margin: 0px;
+}
+
+#weatherTable #weatherRow p {
+            margin: 0;
+            padding: 0;
+            padding-bottom: 5px;
+            font-size: 10.5px;
+        }
+
+#SunsetSunrise{
+padding-top: 20px;
+  float:left;
+  font-size: 12px;
+}
+
+
+
+
+#greenHouseList{
+  position:absolute;
+    float:right;
+    padding-top: 300px;
+    font-size: 12px;
+}
+
+
+
+#sensorsBlock{
+    position:absolute;
+    top: 365px;
+    padding-bottom: 10px;
+	right:100px;
+    font-size: 12px;
+    z-index: 0;
+}
+
+#sensorsBlock a{
+    margin-left: -10px;
+}

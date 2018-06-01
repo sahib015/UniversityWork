@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>Farmer Cooksy's Farm</title>
+  <link rel="stylesheet" type="text/css" href="CSS/Style.css" />
+  <script type="text/javascript" src="JavaScript/map.js"></script>
+  <script type="text/javascript" src="JavaScript/deviceStatus.js"></script>
+  <script type="text/javascript" src="JavaScript/webpage.js"></script>
+  <script type="text/javascript" src="JavaScript/preferences.js"></script>
+  <script type="text/javascript" src="JavaScript/gh1/tempHumidGauges.js"></script>
+  <script type="text/javascript" src="JavaScript/gh1/moistureGauge.js"></script>
+  <script type="text/javascript" src="JavaScript/gh1/lightGauges.js"></script>
+  <script type="text/javascript" src="JavaScript/gh1/gasGauge.js"></script>
+  <script type="text/javascript" src="JavaScript/gh2/tempHumidGauge.js"></script>
+  <script type="text/javascript" src="JavaScript/gh2/moistureGauge.js"></script>
+  <script type="text/javascript" src="JavaScript/gh2/lightGauge.js"></script>
+  <script type="text/javascript" src="JavaScript/gh2/gasGauge.js"></script>
+  <script type="text/javascript" src="JavaScript/gh3/tempHumidGauges.js"></script>
+  <script type="text/javascript" src="JavaScript/gh3/gasGauge.js"></script>
+  <script type="text/javascript" src="JavaScript/gh3/moistureGauge.js"></script>
+  <script type="text/javascript" src="JavaScript/gh3/lightGauges.js"></script>
+  <script type="text/javascript" src="JavaScript/StoreRoom/tempHumidGauge.js"></script>
+  <script type="text/javascript" src="JavaScript/StoreRoom/lightGauge.js"></script>
+  <script type="text/javascript" src="JavaScript/solar/solarGauge.js"></script>
+  <script type="text/javascript" src="JavaScript/MuckHeap/tempHumidGauge.js"></script>
+  <script type="text/javascript" src="JavaScript/rootCrops/moistureGauge.js"></script>
+  <script type="text/javascript" src="JavaScript/rootCrops/tempHumidGauge.js"></script>
+  <script type="text/javascript" src="JavaScript/rootCrops/lightGauge.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjncuqIDiB0kAomGo28A9vAGJNe6N5jxQ&callback=initMap"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <script>
+    // google.charts.load('current', {'packages':['corechart']});
+    google.charts.load('current', { 'packages': ['gauge'] });
+
+
+    //GREENHOUSE 1
+    google.charts.setOnLoadCallback(drawTempGaugePlantZoneGH1);
+    google.charts.setOnLoadCallback(drawHumidGaugePlantZoneGH1);
+    google.charts.setOnLoadCallback(drawTempGaugeCO2ProductionGH1);
+    google.charts.setOnLoadCallback(drawHumidGaugeCO2ProductionGH1);
+    google.charts.setOnLoadCallback(drawTempGaugeSouthDoorGH1);
+    google.charts.setOnLoadCallback(drawHumidGaugeSouthDoorGH1);
+    google.charts.setOnLoadCallback(drawTempGaugeNorthDoorGH1);
+    google.charts.setOnLoadCallback(drawHumidGaugeNorthDoorGH1);
+    google.charts.setOnLoadCallback(drawMoistureGaugeGH1);
+    google.charts.setOnLoadCallback(drawLightPlantZoneGH1);
+    google.charts.setOnLoadCallback(drawLightSouthDoorGH1);
+    google.charts.setOnLoadCallback(drawLightNorthDoorGH1);
+    google.charts.setOnLoadCallback(drawGasGaugeGH1);
+
+    //GREEN HOUSE 2
+    google.charts.setOnLoadCallback(drawTempGaugePlantzoneGH2);
+    google.charts.setOnLoadCallback(drawTempGaugeMainsGH2);
+    google.charts.setOnLoadCallback(drawTempGaugeSouthDoorGH2);
+    google.charts.setOnLoadCallback(drawTempGaugeNorthDoorGH2);
+    google.charts.setOnLoadCallback(drawHumidGaugeMainsGH2);
+    google.charts.setOnLoadCallback(drawHumidGaugeNorthDoorGH2);
+    google.charts.setOnLoadCallback(drawHumidGaugeSouthDoorGH2);
+    google.charts.setOnLoadCallback(drawHumidGaugePlantzoneGH2);
+    google.charts.setOnLoadCallback(drawGasGaugeGH2);
+    google.charts.setOnLoadCallback(drawLightPlantzoneGH2);
+    google.charts.setOnLoadCallback(drawNorthDoorGH2);
+    google.charts.setOnLoadCallback(drawLightMainsGH2);
+    google.charts.setOnLoadCallback(drawLightSouthDoorGH2);
+    google.charts.setOnLoadCallback(drawMoisturePlantZoneGH2);
+    google.charts.setOnLoadCallback(drawMoistureMainsGH2);
+
+    //GREEN HOUSE 3
+    google.charts.setOnLoadCallback(drawTempGaugeEastDoorGH3);
+    google.charts.setOnLoadCallback(drawTempGaugeSeedsGH3);
+    google.charts.setOnLoadCallback(drawTempGaugeWestDoorGH3);
+    google.charts.setOnLoadCallback(drawHumidGaugeEastDoorGH3);
+    google.charts.setOnLoadCallback(drawHumidGaugeSeedsGH3);
+    google.charts.setOnLoadCallback(drawHumidGaugeWestDoorGH3);
+    google.charts.setOnLoadCallback(drawMoistureGaugeGH3);
+    google.charts.setOnLoadCallback(drawLightEastDoorGH3);
+    google.charts.setOnLoadCallback(drawLightSeedsGH3);
+    google.charts.setOnLoadCallback(drawLightGagueWestDoorGH3);
+    google.charts.setOnLoadCallback(drawGasGaugeGH3);
+
+    // ROOMS
+    google.charts.setOnLoadCallback(drawStoreRoomTempGauge);
+    google.charts.setOnLoadCallback(drawStoreRoomHumidGauge);
+    google.charts.setOnLoadCallback(drawLightStoreRoom);
+    google.charts.setOnLoadCallback(drawSolar);
+    google.charts.setOnLoadCallback(drawTempGaugeMuckHeap);
+    google.charts.setOnLoadCallback(drawHUmidGaugeMuckHeap);
+    google.charts.setOnLoadCallback(drawMoistureGaugeRootCrops);
+    google.charts.setOnLoadCallback(drawTempGaugeRootCrops);
+google.charts.setOnLoadCallback(drawLightGaugeRootCrops);
+
+    $(document).ready(function () {
+      // loadData();// calls the loadData method  to get the records from the server
+      //   ÇÇ
+
+    });
+  </script>
+
+
+
+</head>
+
+<body onload="getWeatherData();">
+  <!--header of page-->
+  <header>
+    <h1>Farmer Cooksy's Farm</h1>
+  </header>
+  <!--main content-->
+  <div id="information">
+    <div id="weatherDiv">
+      <!--start of weather-->
+      <div id="weatherForcast">
+        <!-- start of weatherForcast-->
+        <table id="weatherTable">
+          <tr id="weatherRow">
+          </tr>
+        </table>
+
+        <div id="SunsetSunrise">
+          <!-- start of sunrise and sunset div-->
+          <!--table for sunrise and sunset-->
+          <table id="tableSunsetSunrise">
+            <tr>
+              <thead>
+                <th>
+                  <p id="todaySunTitle"></p>
+                </th>
+                <th>
+                  <p id="tomorSunTitle"></p>
+                </th>
+              </thead>
+              <tr>
+                <td>
+                  <p id="sunRiseTod"></p>
+                </td>
+                <td>
+                  <p id="sunRiseTom"></p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p id="sunSetTod"></p>
+                </td>
+                <td>
+                  <p id="sunSetTom"></p>
+                </td>
+              </tr>
+
+          </table>
+            <div id="viewOutsideLight">
+      <h4 style="margin-bottom:10px;">Solar Reading</h4>
+      <div id="solarLightGague">
+
+      </div>
+    </div>
+          <!-- end of table for sunrsie and sunset-->
+        </div>
+        <!-- end of sunrise and sunset div-->
+
+      </div>
+      <!--end of weatherForcast-->
+    </div>
+    <!--end of weather-->
+    <div id="markersKey">
+      <!--start markers key-->
+      <h3>View Data</h3>
+      <p>Click on the map's markers to view each room</p>
+      <table id="tblMarkers">
+        <tr>
+
+          <td>
+            <img src="Photos/green_MarkerA.png">Green House 1</img>
+          </td>
+          <td>
+            <img src="Photos/yellow_MarkerA.png">Store Room</img>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img src="Photos/green_MarkerB.png">Green House 2</img>
+          </td>
+          <td>
+            <img src="Photos/yellow_MarkerB.png">Muck Heap</img>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img src="Photos/green_MarkerC.png">Green House 3</img</td>
+            <td>
+              <img src="Photos/yellow_MarkerC.png">Root Crops</img>
+            </td>
+
+
+
+        </tr>
+
+      </table>
+
+    </div>
+    <!--end markers key-->
+    <div id="greenHouseList">
+      <h3>Device Status</h3>
+      <p>Check the status of the devices by clicking on a site below
+        <br/>
+        <strong>If device's name is colour
+          <span style="color:red">red</span>, check the condition of that sensor. Otherwise the sensors name will be coloured
+          <span style="color:green">green</span>
+        </strong>
+      </p>
+
+      <li>
+        <a href="JavaScript:void(0)" onclick="showData(this)">Greenhouse 1</a>
+      </li>
+      <li>
+        <a href="JavaScript:void(0)" onclick="showData(this)">Greenhouse 2</a>
+      </li>
+      <li>
+        <a href="JavaScript:void(0)" onclick="showData(this)">Greenhouse 3</a>
+      </li>
+      <li>
+        <a href="JavaScript:void(0)" onclick="showData(this)">House</a>
+      </li>
+      <li>
+        <a href="JavaScript:void(0)" onclick="showData(this)">Outside</a>
+      </li>
+
+
+
+      <div id="sensorsBlock">
+        <ul id="sensorsList">
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--main content-->
+  <div id="map">
+    <!--add map -->
+  </div>
+  <!-- start popup for green house 1-->
+  <div id="popup-greenHouse1" class="popup-position">
+    <div id="popup-wrapper">
+      <div id="popup-container">
+        <a id="header_text" href="javascript:void(0)" onclick="toggle_visibility('popup-greenHouse1');">Close</a>
+        <h2>Green House 1- Ornamental Catcus </h2>
+        <button type="button" name="button" onclick="toggle_visibility('popup-greenHouse1Preferences')">Set Optimal Conditions</button>
+        <input id="prefButtonGh1" type="button" name="button" onclick=loadPreferencesGreenHouse1(); value="View preferences"></input>
+        <p id="outputGh1"></p>
+        <h3>Sensors in green house</h3>
+        <table id="gh1Sensors">
+          <tr>
+            <td>
+              <h4>CO2 Production Gas</h4>
+              <div id="gh1GasGauge"></div>
+            </td>
+            <td>
+              <h4>TempHumid</h4>
+
+              <div id="gh1tempHumidGauges">
+                <table border="1px">
+                  <thead>
+                    <th> Plant Zone</th>
+                    <th> CO2 Production</th>
+                    <th>South Door</th>
+                    <th> North Door </th>
+
+          </tr>
+          </thead>
+          <tr>
+            <td>
+              <div id="gh1tempGauge1">
+
+              </div>
+            </td>
+            <td>
+              <div id="gh1tempGauge2">
+
+              </div>
+            </td>
+            <td>
+              <div id="gh1tempGauge3">
+
+              </div>
+            </td>
+            <td>
+              <div id="gh1tempGauge4">
+
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div id="gh1humidGauge1">
+
+              </div>
+            </td>
+            <td>
+              <div id="gh1humidGauge2">
+              </div>
+            </td>
+            <td>
+              <div id="gh1humidGauge3">
+              </div>
+            </td>
+            <td>
+              <div id="gh1humidGauge4">
+
+              </div>
+            </td>
+          </tr>
+          </table>
+
+          </div>
+          </td>
+          </tr>
+          <tr>
+            <td>
+              <h4>Hydrometer</h4>
+              <div id="gh1MoustureGuage"></div>
+            </td>
+
+            <td>
+
+              <h4>Lumosity</h4>
+
+              <div id="gh1lightGauges">
+                <table border="1px">
+                  <thead>
+                    <th> Plant Zone</th>
+                    <th>South Door</th>
+                    <th> North Door </th>
+
+          </tr>
+          </thead>
+          <tr>
+            <td>
+              <div id="gh1lightGauge1"></div>
+            </td>
+            <td>
+              <div id="gh1lightGauge2"></div>
+            </td>
+            <td>
+              <div id="gh1lightGauge3"></div>
+            </td>
+
+          </tr>
+
+          </table>
+
+          </div>
+          </td>
+
+          </tr>
+        </table>
+
+
+      </div>
+      <!-- end of popup container-->
+    </div>
+    <!-- end popup wrapper-->
+  </div>
+  <!-- end popup green house 1-->
+
+  <!-- start popup for green house 1-->
+  <div id="popup-greenHouse1Preferences" class="popup-position">
+    <div id="popup-wrapper">
+
+      <div id="popup-container">
+
+        <a id="header_text" href="javascript:void(0)" onclick="toggle_visibility('popup-greenHouse1Preferences');">Close</a>
+        <div>
+          <!--container for the optimal condtions-->
+          <form method="post" action="#">
+            <!--form  for entering the conditions-->
+            <p> Select the type of sensor to add the optimal conditions for the green house</p>
+
+            <select name="sensors" id="sensors">
+              <option value="select">Select</option>
+              <option value="Gas">Gas</option>
+              <option value="Temperature">Temperature</option>
+              <option value="Humidity">Humidity</option>
+              <option value="Moisture">Moisture</option>
+              <option value="Lumosity">Lumosity</option>
+            </select>
+            <table border="0">
+              <tr>
+                <td>
+                  <label name="minValue">Minimum Value </label>
+                </td>
+                <td>
+                  <input type="text" name="txtMinValue" id="txtMinValueGh1" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label name="maxValue">Maximum Value </label>
+                </td>
+                <td>
+                  <input type="text" name="txtMaxValue" id="txtMaxValueGh1" />
+                </td>
+              </tr>
+            </table>
+            <input type="button" name="saveValuesGh1"  id="saveValuesGh1"value="Save" onclick="storeOptimalConditionsGreenHouse1();" />
+          </form>
+          <!-- end of form-->
+        </div>
+        <!-- close of optimal conditions contaienr-->
+
+      </div>
+      <!-- end of popup container-->
+    </div>
+    <!-- end popup wrapper-->
+  </div>
+  <!-- end popup green house 1-->
+
+  <!-- start popup for green house 2-->
+  <div id="popup-greenHouse2" class="popup-position">
+    <div id="popup-wrapper">
+      <div id="popup-container">
+        <a id="header_text" href="javascript:void(0)" onclick="toggle_visibility('popup-greenHouse2');">Close</a>
+        <h2>Green House 2- Lettuce Fields </h2>
+        <button type="button" name="button" onclick="toggle_visibility('popup-greenHouse2Preferences')">Set Optimal Conditions</button>
+        <input id="prefButtonGh2" type="button" name="button" onclick=loadPreferencesGreenHouse2(); value="View preferences"></input>
+        <p id="outputGh2"></p>
+        <h3>Sensors in green house</h3>
+        <table id="gh2Sensors">
+          <tr>
+            <td>
+              <h4>CO2 Production Gas</h4>
+              <div id="gh2GasGauge"></div>
+            </td>
+            <td>
+              <h4>TempHumid</h4>
+
+              <div id="gh2tempHumidGauges">
+                <table border="1px">
+                  <thead>
+                    <th> Plant Zone</th>
+                    <th> Main</th>
+                    <th>South Door</th>
+                    <th> North Door </th>
+
+          </tr>
+          </thead>
+          <tr>
+            <td>
+              <div id="gh2tempGauge1">
+
+              </div>
+            </td>
+            <td>
+              <div id="gh2tempGauge2">
+
+              </div>
+            </td>
+            <td>
+              <div id="gh2tempGauge3">
+
+              </div>
+            </td>
+            <td>
+              <div id="gh2tempGauge4">
+
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div id="gh2humidGauge1">
+
+              </div>
+            </td>
+            <td>
+              <div id="gh2humidGauge2">
+              </div>
+            </td>
+            <td>
+              <div id="gh2humidGauge3">
+              </div>
+            </td>
+            <td>
+              <div id="gh2humidGauge4">
+
+              </div>
+            </td>
+          </tr>
+          </table>
+
+          </div>
+          </td>
+          </tr>
+          <tr>
+            <td>
+              <h4>Hydrometer</h4>
+              <div id="gh2MoistureGuage1"></div>
+              <div id="gh2MoistureGuage2"></div>
+            </td>
+
+            <td>
+
+              <h4>Lumosity</h4>
+
+              <div id="gh2lightGauges">
+                <table border="1px">
+                  <thead>
+                    <th> Plant Zone</th>
+
+                    <th> North Door </th>
+                    <th> Mains </th>
+                    <th>South Door</th>
+
+          </tr>
+          </thead>
+          <tr>
+            <td>
+              <div id="gh2lightGauge1"></div>
+            </td>
+            <td>
+              <div id="gh2lightGauge2"></div>
+            </td>
+            <td>
+              <div id="gh2lightGauge3"></div>
+            </td>
+            <td>
+              <div id="gh2lightGauge4"></div>
+            </td>
+          </tr>
+
+          </table>
+
+          </div>
+          </td>
+
+          </tr>
+        </table>
+
+
+      </div>
+      <!-- end of popup container-->
+    </div>
+    <!-- end popup wrapper-->
+  </div>
+  <!-- end popup green house 2-->
+
+    <!-- start popup for green house 2-->
+    <div id="popup-greenHouse2Preferences" class="popup-position">
+      <div id="popup-wrapper">
+
+        <div id="popup-container">
+
+          <a id="header_text" href="javascript:void(0)" onclick="toggle_visibility('popup-greenHouse2Preferences');">Close</a>
+          <div>
+            <!--container for the optimal condtions-->
+            <form method="post" action="#">
+              <!--form  for entering the conditions-->
+              <p> Select the type of sensor to add the optimal conditions for the green house</p>
+
+              <select name="sensors" id="sensorsgh2">
+                <option value="select">Select</option>
+                <option value="Gas">Gas</option>
+                <option value="Temperature">Temperature</option>
+                <option value="Humidity">Humidity</option>
+                <option value="Moisture">Moisture</option>
+                <option value="Lumosity">Lumosity</option>
+              </select>
+              <table border="0">
+                <tr>
+                  <td>
+                    <label name="minValue">Minimum Value </label>
+                  </td>
+                  <td>
+                    <input type="text" name="txtMinValue" id="txtMinValueGh2" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label name="maxValue">Maximum Value </label>
+                  </td>
+                  <td>
+                    <input type="text" name="txtMaxValue" id="txtMaxValueGh2" />
+                  </td>
+                </tr>
+              </table>
+              <input type="button" name="saveValuesGh2" id="saveValuesGh2" value="Save" onclick="storeOptimalConditionsGreenHouse2();" />
+            </form>
+            <!-- end of form-->
+          </div>
+          <!-- close of optimal conditions contaienr-->
+
+        </div>
+        <!-- end of popup container-->
+      </div>
+      <!-- end popup wrapper-->
+    </div>
+    <!-- end popup green house 2-->
+
+
+  <!-- start popup for green house 3-->
+  <div id="popup-greenHouse3" class="popup-position">
+    <div id="popup-wrapper">
+      <div id="popup-container">
+        <a id="header_text" href="javascript:void(0)" onclick="toggle_visibility('popup-greenHouse3');">Close</a>
+        <h2>Green House 3- Seedlings </h2>
+        <button ype="button" name="button" onclick="toggle_visibility('popup-greenHouse3Preferences')">Set Optimal Conditions</button>
+        <input id="prefButtonGh3" type="button" name="button" onclick=loadPreferencesGreenHouse3(); value="View preferences"></input>
+        <p id="outputGh3"></p>
+        <h3>Sensors in green house</h3>
+        <table id="gh3Sensors">
+          <tr>
+            <td>
+              <h4> CO2 Prodcution Gas</h4>
+              <div id="gh3GasGauge"></div>
+            </td>
+            <td>
+              <h4>TempHumid</h4>
+
+              <div id="gh3tempHumidGauges">
+                <table border="1px">
+                  <thead>
+                    <th> East Door</th>
+                    <th>Seeds</th>
+                    <th> West Door </th>
+
+          </tr>
+          </thead>
+          <tr>
+            <td>
+              <div id="gh3tempGauge1">
+
+              </div>
+            </td>
+            <td>
+              <div id="gh3tempGauge2">
+
+              </div>
+            </td>
+            <td>
+              <div id="gh3tempGauge3">
+
+              </div>
+            </td>
+
+          </tr>
+          <tr>
+            <td>
+              <div id="gh3humidGauge1">
+
+              </div>
+            </td>
+            <td>
+              <div id="gh3humidGauge2">
+              </div>
+            </td>
+            <td>
+              <div id="gh3humidGauge3">
+              </div>
+            </td>
+
+          </tr>
+          </table>
+
+          </div>
+          </td>
+          </tr>
+          <tr>
+            <td>
+              <h4> Seed Moisture</h4>
+              <div id="gh3MoustureGuage"></div>
+            </td>
+
+            <td>
+
+              <h4>Lumosity</h4>
+
+              <div id="gh1lightGauges">
+                <table border="1px">
+                  <thead>
+                    <th> East Door</th>
+                    <th>Seeds</th>
+                    <th> West Door </th>
+
+          </tr>
+          </thead>
+          <tr>
+            <td>
+              <div id="gh3lightGauge1"></div>
+            </td>
+            <td>
+              <div id="gh3lightGauge2"></div>
+            </td>
+            <td>
+              <div id="gh3lightGauge3"></div>
+            </td>
+
+          </tr>
+
+          </table>
+
+          </div>
+          </td>
+
+          </tr>
+        </table>
+
+
+      </div>
+      <!-- end of popup container-->
+    </div>
+    <!-- end popup wrapper-->
+  </div>
+  <!-- end popup green house 3-->
+  <!-- start popup for green house 3-->
+  <div id="popup-greenHouse3Preferences" class="popup-position">
+    <div id="popup-wrapper">
+
+      <div id="popup-container">
+
+        <a id="header_text" href="javascript:void(0)" onclick="toggle_visibility('popup-greenHouse3Preferences');">Close</a>
+        <div>
+          <!--container for the optimal condtions-->
+          <form method="post" action="#">
+            <!--form  for entering the conditions-->
+            <p> Select the type of sensor to add the optimal conditions for the green house</p>
+
+            <select name="sensors" id="sensorsgh3">
+              <option value="select">Select</option>
+              <option value="Gas">Gas</option>
+              <option value="Temperature">Temperature</option>
+              <option value="Humidity">Humidity</option>
+              <option value="Moisture">Moisture</option>
+              <option value="Lumosity">Lumosity</option>
+            </select>
+            <table border="0">
+              <tr>
+                <td>
+                  <label name="minValue">Minimum Value </label>
+                </td>
+                <td>
+                  <input type="text" name="txtMinValue" id="txtMinValueGh3" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label name="maxValue">Maximum Value </label>
+                </td>
+                <td>
+                  <input type="text" name="txtMaxValue" id="txtMaxValueGh3" />
+                </td>
+              </tr>
+            </table>
+            <input type="button" name="saveValuesGh3" id="saveValuesGh3" value="Save" onclick="storeOptimalConditionsGreenHouse3();" />
+          </form>
+          <!-- end of form-->
+        </div>
+        <!-- close of optimal conditions contaienr-->
+
+      </div>
+      <!-- end of popup container-->
+    </div>
+    <!-- end popup wrapper-->
+  </div>
+  <!-- end popup green house 3-->
+
+  <!-- start popup for storeRoom-->
+  <div id="popup-storeRoom" class="popup-position">
+    <div id="popup-wrapper">
+      <div id="popup-container">
+        <a id="header_text" href="javascript:void(0)" onclick="toggle_visibility('popup-storeRoom');">Close</a>
+        <h2>Store Room </h2>
+
+        <p id="output"></p>
+        <h3>Sensors in Store Room</h3>
+        <table id="storeRoomSensors">
+          <tr>
+            <td>
+              <h4> Store Temperature and Humidity </h4>
+              <div id="gh3tempHumidGauges">
+                <table border="1px">
+
+                  <tr>
+                    <td>
+                      <div id="storeRoomtempHumidGauge"></div>
+
+                    </td>
+
+
+                  </tr>
+                  <tr>
+                    <td>
+                      <div id="storeRoomhumidGauge">
+
+                      </div>
+                    </td>
+
+                  </tr>
+                </table>
+            </td>
+            <td>
+              <h4>Store Light</h4>
+
+              <div id="storeRoomLightGauge">
+
+
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        </div>
+        </td>
+
+        </tr>
+        </table>
+
+
+      </div>
+      <!-- end of popup container-->
+    </div>
+    <!-- end popup wrapper-->
+  </div>
+  <!-- end popup storeRoom-->
+
+  <!--start popup for muck Heap-->
+  <div id="popup-muckHeap" class="popup-position">
+    <div id="popup-wrapper">
+      <div id="popup-container">
+        <a id="header_text" href="javascript:void(0)" onclick="toggle_visibility('popup-muckHeap');">Close</a>
+        <h2>Muck Heap </h2>
+
+        <p id="output"></p>
+        <h3>Sensor in Muck Heap</h3>
+        <table id="muckHeapSensors">
+          <tr>
+            <td>
+              <h4> Compost Temperature and Humidity </h4>
+              <div id="muckHeaptempHumidGauges">
+                <table border="1px">
+
+                  <tr>
+                    <td>
+                      <div id="muckHeapTempGauge"></div>
+
+                    </td>
+
+
+                  </tr>
+                  <tr>
+                    <td>
+                      <div id="muckHeaphumidGauge">
+
+                      </div>
+                    </td>
+
+                  </tr>
+                </table>
+            </td>
+
+          </tr>
+        </table>
+
+        </div>
+
+      </div>
+      <!-- end of popup container-->
+    </div>
+    <!-- end popup wrapper-->
+  </div>
+
+  <!-- end of muck Heap-->
+
+  <!--start popup for root crops-->
+  <div id="popup-rootCrops" class="popup-position">
+    <div id="popup-wrapper">
+      <div id="popup-container">
+        <a id="header_text" href="javascript:void(0)" onclick="toggle_visibility('popup-rootCrops');">Close</a>
+        <h2>Root Crops </h2>
+        
+        <p id="output"></p>
+        <h3>Sensors in Root Crops</h3>
+        <table id="storeRoomSensors">
+          <tr>
+            <td>
+              <h4> Outside field moisture </h4>
+              <div id="rootCropsMoistureGauge">
+              </div>
+            </td>
+
+            <td>
+              <h4> Outside field temperature and humidity </h4>
+              <div id="outsideFieldTempHumid">
+                <table>
+                  <tr>
+                    <td>
+                      <div id="outsideTempGauge"></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div id="outsideHumidGauge"></div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+            <td>
+              <h4> Outside field light </h4>
+              <div id="outsideFieldTempHumid">
+                <table>
+                  <tr>
+
+                    <td>
+                      <div id="outsideTempGauge"></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div id="outsideHumidGauge"></div>
+                    </td>
+
+                    <td><div id="outsideLightGauge"></div></td>
+
+                  </tr>
+
+                </table>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+
+      </div>
+      <!-- end of popup container-->
+    </div>
+    <!-- end popup wrapper-->
+  </div>
+  <!--footer -->
+  <footer>
+    <p id="textFooter">Calvin Rutley (cr553), James Hannigan (jh861), Tahmoor Ulhaq (tu34) and Sahib Jabbal (ssj9)</p>
+  </footer>
+
+</body>
+
+</html>
