@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=newAnimals
+comment0.target=void\ act(java.util.List)
+comment0.text=\r\n\ Make\ this\ animal\ act\ -\ that\ is\:\ make\ it\ do\r\n\ whatever\ it\ wants/needs\ to\ do.\r\n\ @param\ newAnimals\ A\ list\ to\ add\ newly\ born\ animals\ to.\r\n
+comment1.params=
+comment1.target=boolean\ isActive()
+comment1.text=\r\n\ Check\ whether\ the\ animal\ is\ active\ or\ not.\r\n\ @return\ true\ if\ the\ animal\ is\ still\ active.\r\n
+comment2.params=
+comment2.target=Location\ getLocation()
+comment2.text=\r\n\ Return\ the\ animal's\ location.\r\n\ @return\ The\ animal's\ location.\r\n
+comment3.params=
+comment3.target=Field\ getField()
+comment3.text=\r\n\ Return\ the\ animal's\ field.\r\n\ @return\ The\ animal's\ field.\r\n
+numComments=4
