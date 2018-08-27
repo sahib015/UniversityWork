@@ -1,3 +1,3 @@
 This is an iOS application for University of Kent community that is able to find a bus.
 This project was to personalise the application and build on the application from previous year students who had started the application.
-To view the project, click on the index.html file in the corpus folder
+To view the project, download the corpus.zip file and open the index.html file.
